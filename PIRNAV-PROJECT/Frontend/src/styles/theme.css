@@ -73,6 +73,7 @@ body {
   grid-template-columns: minmax(0, 1.02fr) minmax(18rem, 0.98fr);
   gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: center;
+  min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
   padding: clamp(1.5rem, 4vw, 3rem);
   border-radius: var(--radius-lg);
   background: var(--theme-shell-bg);

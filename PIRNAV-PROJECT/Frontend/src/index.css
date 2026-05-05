@@ -36,7 +36,8 @@ body {
   --theme-shadow: 0 24px 48px rgba(16, 49, 58, 0.12);
   --shadow-soft: 0 18px 36px rgba(16, 49, 58, 0.1);
   --page-shell: min(1240px, calc(100% - 2rem));
-  --navbar-offset: clamp(4.5rem, 8vw, 5.5rem);
+  --navbar-offset: clamp(2.5rem, 5vw, 3.25rem);
+  --dashboard-hero-height: clamp(24rem, 75vh, 34rem);
   --chat-safe-space: clamp(5.5rem, 11vw, 7.5rem);
 }
 

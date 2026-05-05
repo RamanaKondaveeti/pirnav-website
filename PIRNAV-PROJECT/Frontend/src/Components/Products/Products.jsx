@@ -29,7 +29,7 @@ import {
   sanitizeFormPayload,
   validateDemoForm,
 } from "../../utils/formValidation";
-import { buildApiUrl } from "../../config/api";
+import { buildApiUrl, jsonApiHeaders } from "../../config/api";
 
 const CONTACT_API = buildApiUrl("Contact");
 
@@ -1001,7 +1001,7 @@ function Products() {
       const payload = sanitizeFormPayload(demoForm);
       const response = await fetch(CONTACT_API, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: jsonApiHeaders,
         body: JSON.stringify({
           name: payload.name,
           email: payload.email,

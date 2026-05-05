@@ -17,7 +17,7 @@
 
 .careers-hero {
   position: relative;
-  min-height: 360px;
+  min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
   padding: 56px 6vw 40px;
   background:
     linear-gradient(135deg, #0d1b2f 0%, #122640 48%, #173153 100%);
@@ -1399,7 +1399,7 @@
 
 @media (max-width: 768px) {
   .careers-hero {
-    min-height: 260px;
+    min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
     padding: 40px 22px 24px;
   }
 

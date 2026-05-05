@@ -13,7 +13,7 @@ body {
 
 .about-hero-banner {
   position: relative;
-  min-height: 78vh;
+  min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -21,7 +21,7 @@ body {
 }
 
 .about-hero-overlay {
-  min-height: 50vh;
+  min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
   display: flex;
   align-items: center;
   padding: 60px 56px 52px;
@@ -727,7 +727,7 @@ body {
 
 @media (max-width: 760px) {
   .about-hero-overlay {
-    min-height: 72vh;
+    min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
     padding: 112px 18px 44px;
   }
 

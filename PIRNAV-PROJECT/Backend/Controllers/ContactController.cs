@@ -116,7 +116,7 @@ Regards,<br/>
 </div>
 </div>";
 
-            var hrEmail = _config["EmailSettings:HrEmail"];
+            var hrEmail = _config["EmailSettings:ContactEmail"] ?? _config["EmailSettings:HrEmail"];
             if (!string.IsNullOrEmpty(hrEmail))
             {
                 await _emailService.SendEmailAsync(hrEmail, hrSubject, hrBody);

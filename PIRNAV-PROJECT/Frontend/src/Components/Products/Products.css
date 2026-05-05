@@ -28,7 +28,9 @@
 .products-hero {
   position: relative;
   overflow: hidden;
-  padding: 128px 6vw 72px;
+  min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
+  box-sizing: border-box;
+  padding: 200px 6vw 150px;
   background:
     linear-gradient(122deg, rgba(7, 20, 39, 0.95), rgba(12, 60, 102, 0.84)),
     url("/images/itsolutions.jpg") center/cover;
@@ -2587,6 +2589,7 @@
 
 @media (max-width: 768px) {
   .products-hero {
+    min-height: var(--dashboard-hero-height, clamp(24rem, 75vh, 34rem));
     padding: 112px 22px 52px;
   }
 

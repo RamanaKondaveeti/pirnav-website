@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://farrandly-interalar-talon.ngrok-free.dev",
+        target: "https://breath-kelp-skipping.ngrok-free.dev",
         changeOrigin: true,
         secure: true,
       },

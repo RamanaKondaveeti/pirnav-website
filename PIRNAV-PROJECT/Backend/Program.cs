@@ -55,7 +55,7 @@ builder.Services.AddCors(options =>
             .WithOrigins(
                 "http://localhost:5173",
                 "https://localhost:5173",
-                "https://farrandly-interalar-talon.ngrok-free.dev"
+                "https://breath-kelp-skipping.ngrok-free.dev"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
@@ -266,6 +266,38 @@ app.UseAuthorization();
 //    await next();
 //});
 
+app.MapGet("/", () =>
+{
+    if (app.Environment.IsDevelopment())
+    {
+        return Results.Redirect("/swagger");
+    }
+
+    return Results.Ok(new
+    {
+        name = "Pirnav API",
+        status = "Running"
+    });
+});
+
 app.MapControllers();
+
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    var urls = app.Urls.Count > 0 ? app.Urls : new[] { "http://localhost:5000" };
+
+    Console.WriteLine();
+    Console.WriteLine("Pirnav API is running:");
+
+    foreach (var url in urls)
+    {
+        Console.WriteLine($"  API: {url}");
+
+        if (app.Environment.IsDevelopment())
+        {
+            Console.WriteLine($"  Swagger: {url.TrimEnd('/')}/swagger");
+        }
+    }
+});
 
 app.Run();

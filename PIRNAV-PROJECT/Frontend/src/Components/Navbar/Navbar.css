@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0 0 auto;
   width: 97%;
-  padding: 1rem clamp(1rem, 2.5vw, 1.5rem);
+  padding: 0.25rem clamp(0.875rem, 2vw, 1.25rem);
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
   backdrop-filter: blur(0.875rem);
@@ -25,7 +25,7 @@
 }
 
 .nav-logo img {
-  height: clamp(2.75rem, 4vw, 3.25rem);
+  height: clamp(1.5rem, 2.25vw, 2rem);
   width: auto;
 }
 
@@ -33,8 +33,8 @@
   display: none;
   align-items: center;
   justify-content: center;
-  width: 2.875rem;
-  height: 2.875rem;
+  width: 2.125rem;
+  height: 2.125rem;
   border: 1px solid rgba(11, 114, 134, 0.16);
   border-radius: 0.875rem;
   background: #ffffff;
@@ -66,12 +66,12 @@
 
 .nav-links a:hover,
 .dropdown-trigger > a:hover {
-  color: #2563eb;
+  color: #0b7286;
 }
 
 .nav-links a.nav-item-active,
 .dropdown-trigger > a.nav-item-active {
-  color: #2563eb;
+  color: #0b7286;
   font-weight: 700;
 }
 
@@ -219,8 +219,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 2.75rem;
-  padding: 0.625rem 1.125rem;
+  min-height: 2rem;
+  padding: 0.3125rem 0.875rem;
   border-radius: 0.75rem;
   color: #ffffff !important;
   font-weight: 600;
@@ -257,7 +257,7 @@
 
 @media (max-width: 760px) {
   .navbar {
-    padding: 0.875rem 1rem;
+    padding: 0.25rem 0.875rem;
   }
 
   .nav-menu-button {

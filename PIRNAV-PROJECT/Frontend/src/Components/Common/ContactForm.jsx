@@ -5,7 +5,7 @@ import {
   validateContactForm,
 } from "../../utils/formValidation";
 import "./ContactForm.css";
-import { buildApiUrl } from "../../config/api";
+import { buildApiUrl, jsonApiHeaders } from "../../config/api";
 
 const CONTACT_API = buildApiUrl("Contact");
 
@@ -87,7 +87,7 @@ function ContactForm({
       const payload = sanitizeFormPayload(formData);
       const response = await fetch(CONTACT_API, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: jsonApiHeaders,
         body: JSON.stringify(payload),
       });
 

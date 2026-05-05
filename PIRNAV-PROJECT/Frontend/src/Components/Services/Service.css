@@ -9,7 +9,7 @@
  
 /* HERO */
 .srv-hero {
-  height: 70vh;
+  min-height: var(--dashboard-hero-height, clamp(24rem, 95vh, 34rem));
   position: relative;
   display: flex;
   align-items: center;

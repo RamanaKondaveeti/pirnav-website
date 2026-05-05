@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaComments, FaPaperPlane, FaRobot, FaTimes } from "react-icons/fa";
 import "./ChatWidget.css";
-import { buildApiUrl } from "../../config/api";
+import { buildApiUrl, jsonApiHeaders } from "../../config/api";
 
 const CHAT_API = buildApiUrl("Chat");
 const SESSION_STORAGE_KEY = "pirnav-chat-session-id";
@@ -142,9 +142,7 @@ function ChatWidget() {
 
       const response = await fetch(CHAT_API, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: jsonApiHeaders,
         body: JSON.stringify({
           message: trimmedMessage,
           sessionId: sessionIdRef.current,

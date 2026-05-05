@@ -94,10 +94,15 @@ namespace Pirnav.API.Controllers
             string formattedTime = DateTime.Today.Add(dto.InterviewTime).ToString("hh:mm tt");
 
             // ================= CANDIDATE EMAIL =================
+            if (string.IsNullOrWhiteSpace(application.Email))
+            {
+                return BadRequest("Candidate email is missing.");
+            }
+
             try
             {
                 await _emailService.SendEmailAsync(
-                    application.Email,
+                    application.Email.Trim(),
                     "Interview Invitation - Pirnav",
                     $@"
 <div style='background:#f4f6f8;padding:30px;font-family:Segoe UI'>
@@ -162,13 +167,17 @@ Email: hr.admin@pirnav.com
 </div>"
                 );
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Candidate interview email failed for {application.Email}: {ex}");
+                return StatusCode(500, "Interview saved, but candidate email could not be sent.");
+            }
 
 
             // ================= INTERVIEWER EMAIL =================
             try
             {
-                var baseUrl = "https://farrandly-interalar-talon.ngrok-free.dev";
+                var baseUrl = "https://breath-kelp-skipping.ngrok-free.dev";
 
                 var feedbackLink = $"{baseUrl}/feedback.html?token={interview.FeedbackToken}";
                 var resumeLink = $"{baseUrl}/api/JobApplications/view/{application.Id}";
@@ -325,7 +334,7 @@ Email: hr.admin@pirnav.com
 
             // ================= RESCHEDULE EMAIL LOGIC =================
 
-            var baseUrl = "https://farrandly-interalar-talon.ngrok-free.dev";
+            var baseUrl = "https://breath-kelp-skipping.ngrok-free.dev";
 
             var logoUrl = "https://pirnav.com/images/pirnav_logo.png";
 
@@ -354,10 +363,15 @@ Email: hr.admin@pirnav.com
 
 
             // ================= CANDIDATE EMAIL =================
+            if (application == null || string.IsNullOrWhiteSpace(application.Email))
+            {
+                return BadRequest("Candidate email is missing.");
+            }
+
             try
             {
                 await _emailService.SendEmailAsync(
-                    application.Email,
+                    application.Email.Trim(),
                     "Interview Rescheduled - Pirnav",
                     $@"
 <div style='background:#f4f6f8;padding:30px;font-family:Segoe UI'>
@@ -414,7 +428,11 @@ Warm regards,<br/>
 </div>"
                 );
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Candidate reschedule email failed for {application.Email}: {ex}");
+                return StatusCode(500, "Interview updated, but candidate email could not be sent.");
+            }
 
 
             // ================= INTERVIEWER EMAIL =================

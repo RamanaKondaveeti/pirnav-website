@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <RollForward>Major</RollForward>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -25,6 +26,13 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pirnav.API\**;bin\**;obj\**" />
+    <Content Remove="Pirnav.API\**;bin\**;obj\**" />
+    <EmbeddedResource Remove="Pirnav.API\**;bin\**;obj\**" />
+    <None Remove="Pirnav.API\**;bin\**;obj\**" />
   </ItemGroup>
 
   <ItemGroup>
