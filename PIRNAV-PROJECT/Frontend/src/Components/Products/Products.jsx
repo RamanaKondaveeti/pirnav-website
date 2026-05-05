@@ -15,13 +15,16 @@ import {
   Mail,
   MessageSquareText,
   MonitorCog,
+  Pencil,
   Plane,
+  Share2,
   Shield,
   ShieldCheck,
   Tag,
   UserCheck2,
   Users,
   X,
+  Zap,
 } from "lucide-react";
 import "./Products.css";
 import {
@@ -141,47 +144,35 @@ const productCatalog = [
         actions: ["Start Generating", "View Templates"],
       },
       {
-        title: "Content Ideas",
+        title: "How It Works",
         description:
-          "Choose a content idea and generate unique content based on your input.",
+          "Get from idea to published content in just four simple steps.",
         icon: MonitorCog,
         variant: "ai-ideas",
         ideas: [
           {
-            tag: "Blogging",
-            title: "How-To Guide",
-            text: "Step-by-step content creation.",
+            tag: "01",
+            title: "Choose Content Type",
+            text: "Select from blogs, ads, or captions.",
             icon: FileText,
           },
           {
-            tag: "Social",
-            title: "Engagement Post",
-            text: "Boost likes and comments.",
-            icon: MessageSquareText,
+            tag: "02",
+            title: "Enter Your Topic",
+            text: "Provide a short description or keywords.",
+            icon: Pencil,
           },
           {
-            tag: "Ad",
-            title: "Problem-Solution",
-            text: "Address pain points fast.",
-            icon: MonitorCog,
+            tag: "03",
+            title: "Generate Content",
+            text: "AI creates original, high-quality content.",
+            icon: Zap,
           },
           {
-            tag: "Email",
-            title: "Welcome Email",
-            text: "First impression message.",
-            icon: Mail,
-          },
-          {
-            tag: "Blogging",
-            title: "Trend Insights",
-            text: "Latest industry updates.",
-            icon: LayoutDashboard,
-          },
-          {
-            tag: "Social",
-            title: "Promo Post",
-            text: "Highlight offers quickly.",
-            icon: Tag,
+            tag: "04",
+            title: "Save & Share",
+            text: "Edit and export your ready-to-publish content.",
+            icon: Share2,
           },
         ],
       },
@@ -524,24 +515,17 @@ function Products() {
     if (screen.variant === "ai-hero") {
       return (
         <div className={`product-screen-frame product-screen-frame-ai ${accentClass}`}>
-          <div className="product-screen-bar">
-            <span />
-            <span />
-            <span />
-          </div>
-
           <div className="product-screen-ai product-screen-ai-hero">
             <div className="product-screen-ai-nav">
               <div className="product-screen-ai-brand">
-                <span className="product-screen-ai-brand-icon">
-                  <Brain size={18} aria-hidden="true" />
-                </span>
+                <span className="product-screen-ai-brand-icon" aria-hidden="true" />
                 <strong>AI Content Generator</strong>
               </div>
               <div className="product-screen-ai-menu">
                 <span>Dashboard</span>
                 <span>Content Generator</span>
                 <span>Templates</span>
+                <span>Content History</span>
                 <span>Pricing</span>
               </div>
               <button type="button">Login</button>
@@ -566,8 +550,11 @@ function Products() {
               </div>
 
               <div className="product-screen-ai-illustration">
-                <div className="product-screen-ai-orb product-screen-ai-orb-one" />
-                <div className="product-screen-ai-orb product-screen-ai-orb-two" />
+                <div className="product-screen-ai-doc">
+                  <span />
+                  <span />
+                  <span />
+                </div>
                 <div className="product-screen-ai-monitor">
                   <div className="product-screen-ai-monitor-top">
                     <span />
@@ -581,6 +568,8 @@ function Products() {
                     </div>
                   </div>
                 </div>
+                <div className="product-screen-ai-person product-screen-ai-person-left" />
+                <div className="product-screen-ai-person product-screen-ai-person-right" />
                 <div className="product-screen-ai-floating product-screen-ai-floating-mail">
                   <Mail size={16} aria-hidden="true" />
                 </div>
@@ -597,18 +586,10 @@ function Products() {
     if (screen.variant === "ai-ideas") {
       return (
         <div className={`product-screen-frame product-screen-frame-ai ${accentClass}`}>
-          <div className="product-screen-bar">
-            <span />
-            <span />
-            <span />
-          </div>
-
           <div className="product-screen-ai product-screen-ai-ideas">
             <div className="product-screen-ai-nav">
               <div className="product-screen-ai-brand">
-                <span className="product-screen-ai-brand-icon">
-                  <Brain size={18} aria-hidden="true" />
-                </span>
+                <span className="product-screen-ai-brand-icon" aria-hidden="true" />
                 <strong>AI Content Generator</strong>
               </div>
               <div className="product-screen-ai-menu">
@@ -616,8 +597,10 @@ function Products() {
                 <span>Content Generator</span>
                 <span>Templates</span>
                 <span>Content History</span>
+                <span>Pricing</span>
+                <span>Settings</span>
               </div>
-              <button type="button">Login</button>
+              <span className="product-screen-ai-account">Accd</span>
             </div>
 
             <div className="product-screen-ai-ideas-head">
@@ -630,10 +613,10 @@ function Products() {
                 const IdeaIcon = idea.icon;
                 return (
                   <article key={idea.title} className="product-screen-ai-idea-card">
+                    <small>{idea.tag}</small>
                     <span className="product-screen-ai-idea-icon">
                       <IdeaIcon size={16} aria-hidden="true" />
                     </span>
-                    <small>{idea.tag}</small>
                     <strong>{idea.title}</strong>
                     <p>{idea.text}</p>
                   </article>
