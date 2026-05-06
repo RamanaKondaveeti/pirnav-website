@@ -29,6 +29,7 @@ function ContactForm({
   const [touched, setTouched] = useState({});
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [submitMessage, setSubmitMessage] = useState("");
 
   const visibleErrors = useMemo(
     () =>
@@ -82,6 +83,7 @@ function ContactForm({
 
     setLoading(true);
     setStatus("");
+    setSubmitMessage("");
 
     try {
       const payload = sanitizeFormPayload(formData);
@@ -92,15 +94,28 @@ function ContactForm({
       });
 
       if (!response.ok) {
-        throw new Error("Failed");
+        let errorMessage = "Something went wrong. Please try again.";
+        try {
+          const errorData = await response.json();
+          errorMessage =
+            errorData.message ||
+            Object.values(errorData.errors || {})[0] ||
+            errorMessage;
+        } catch {
+          const errorText = await response.text();
+          errorMessage = errorText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
 
       await response.json();
       setStatus("success");
+      setSubmitMessage("");
       setFormData(defaultValues);
       setErrors(defaultValues);
       setTouched({});
-    } catch {
+    } catch (error) {
+      setSubmitMessage(error.message || "Something went wrong. Please try again.");
       setStatus("error");
     } finally {
       setLoading(false);
@@ -182,7 +197,7 @@ function ContactForm({
 
         {status === "error" ? (
           <p className="shared-contact-status shared-contact-status-error">
-            Something went wrong. Please try again.
+            {submitMessage || "Something went wrong. Please try again."}
           </p>
         ) : null}
 

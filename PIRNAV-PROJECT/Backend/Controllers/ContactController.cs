@@ -116,10 +116,25 @@ Regards,<br/>
 </div>
 </div>";
 
-            var hrEmail = _config["EmailSettings:ContactEmail"] ?? _config["EmailSettings:HrEmail"];
-            if (!string.IsNullOrEmpty(hrEmail))
+            var notificationEmails = new[]
+                {
+                    _config["EmailSettings:ContactEmail"],
+                    _config["EmailSettings:HrEmail"]
+                }
+                .Where(email => !string.IsNullOrWhiteSpace(email))
+                .Select(email => email!.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase);
+
+            foreach (var hrEmail in notificationEmails)
             {
-                await _emailService.SendEmailAsync(hrEmail, hrSubject, hrBody);
+                try
+                {
+                    await _emailService.SendEmailAsync(hrEmail, hrSubject, hrBody);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Contact notification email failed for {hrEmail}: {ex}");
+                }
             }
 
             // ================= USER EMAIL =================
@@ -175,9 +190,16 @@ Warm regards,<br/>
 </div>
 </div>";
 
-            if (!string.IsNullOrEmpty(model.Email))
+            if (!string.IsNullOrWhiteSpace(model.Email))
             {
-                await _emailService.SendEmailAsync(model.Email, userSubject, userBody);
+                try
+                {
+                    await _emailService.SendEmailAsync(model.Email.Trim(), userSubject, userBody);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Contact acknowledgement email failed for {model.Email}: {ex}");
+                }
             }
 
             return Ok(new
