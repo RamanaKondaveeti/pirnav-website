@@ -125,7 +125,7 @@ namespace Pirnav.API.Services
             _context.Leads.Add(lead);
             await _context.SaveChangesAsync();
 
-            var subject = "🚀 New Lead from Pirnav Chatbot";
+            var subject = "New Lead from Pirnav Chatbot";
 
             var body = $@"
         <h3>New Lead Received</h3>
@@ -136,11 +136,21 @@ namespace Pirnav.API.Services
 
             var hrEmail = _configuration["EmailSettings:HrEmail"];
 
-            await _emailService.SendEmailAsync(
-                hrEmail,
-                subject,
-                body
-            );
+            if (!string.IsNullOrWhiteSpace(hrEmail))
+            {
+                try
+                {
+                    await _emailService.SendEmailAsync(
+                        hrEmail,
+                        subject,
+                        body
+                    );
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Chat lead email failed for {hrEmail}: {ex}");
+                }
+            }
         }
     }
 }

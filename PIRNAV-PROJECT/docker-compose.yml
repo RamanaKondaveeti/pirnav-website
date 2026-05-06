@@ -1,7 +1,7 @@
 services:
   frontend:
     build:
-      context: ./PIRNAV-PROJECT/Frontend
+      context: ./Frontend
       dockerfile: Dockerfile
       args:
         VITE_API_ORIGIN: "${VITE_API_ORIGIN:-http://3.108.76.125:5000}"
@@ -13,7 +13,7 @@ services:
 
   backend:
     build:
-      context: ./PIRNAV-PROJECT/Backend
+      context: ./Backend
       dockerfile: Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: "${ASPNETCORE_ENVIRONMENT:-Production}"

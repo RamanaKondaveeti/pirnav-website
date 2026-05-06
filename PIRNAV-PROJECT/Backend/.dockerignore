@@ -4,7 +4,6 @@
 **/.vscode
 **/*.user
 **/*.suo
-**/appsettings*.json
 **/wwwroot/resumes/
 **/wwwroot/uploads/
 Dockerfile

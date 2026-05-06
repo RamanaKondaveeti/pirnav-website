@@ -2,12 +2,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /src
 
-COPY Pirnav.API.sln ./
-COPY Pirnav.API/Pirnav.API.csproj Pirnav.API/
-RUN dotnet restore Pirnav.API.sln
+COPY Pirnav.API.csproj ./
+RUN dotnet restore Pirnav.API.csproj
 
-COPY Pirnav.API/ Pirnav.API/
-RUN dotnet publish Pirnav.API/Pirnav.API.csproj -c Release -o /app/publish /p:UseAppHost=false
+COPY . ./
+RUN dotnet publish Pirnav.API.csproj -c Release -o /app/publish /p:UseAppHost=false
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 

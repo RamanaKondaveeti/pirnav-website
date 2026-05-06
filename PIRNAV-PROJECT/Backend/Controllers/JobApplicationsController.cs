@@ -122,10 +122,12 @@ Email: hr.admin@pirnav.com
             var hrEmail = _config["EmailSettings:HrEmail"];
             if (!string.IsNullOrWhiteSpace(hrEmail))
             {
-                await _emailService.SendEmailAsync(
-                    hrEmail,
-                    "New Job Application Received",
-                    $@"
+                try
+                {
+                    await _emailService.SendEmailAsync(
+                        hrEmail,
+                        "New Job Application Received",
+                        $@"
 <div style='background:#f4f6f8;padding:30px'>
 <div style='max-width:650px;margin:auto;background:#fff;border-radius:10px'>
 
@@ -145,16 +147,23 @@ Email: hr.admin@pirnav.com
 
 </div>
 </div>"
-                );
+                    );
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Job application HR email failed for {hrEmail}: {ex}");
+                }
             }
 
             // ===== CANDIDATE EMAIL =====
             if (!string.IsNullOrWhiteSpace(application.Email))
             {
-                await _emailService.SendEmailAsync(
-                    application.Email,
-                    "Application Received - Pirnav",
-                    $@"
+                try
+                {
+                    await _emailService.SendEmailAsync(
+                        application.Email,
+                        "Application Received - Pirnav",
+                        $@"
 <div style='background:#f4f6f8;padding:30px'>
 <div style='max-width:600px;margin:auto;background:#fff;border-radius:10px'>
 
@@ -180,7 +189,12 @@ We appreciate your interest in joining our team.
 
 </div>
 </div>"
-                );
+                    );
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Job application candidate email failed for {application.Email}: {ex}");
+                }
             }
 
             // ================= EMAIL LOGIC END =================
